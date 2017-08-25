@@ -39,12 +39,12 @@ require("../themes/formidable/index.css");
 // require("../fonts/silkscreen.css");
 require("../fonts/montserrat.css");
 
-const images = {
-  bg: require("../assets/bg_skyline.svg"),
-  logo: require("../assets/logo-seattlejsconference.svg")
-};
+// const images = {
+//   bg: require("../assets/bg_skyline.svg"),
+//   logo: require("../assets/logo-seattlejsconference.svg")
+// };
 
-preloader(images);
+// preloader(images);
 
 export default class Presentation extends React.Component {
   render() {
