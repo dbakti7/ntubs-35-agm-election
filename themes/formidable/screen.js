@@ -18,19 +18,23 @@ const brand = {
   lightestRed: "#efb3a7",
   paleRed: "#f5c5bc",
   palerRed: "#f8d9d2",
-  palestRed: "#f6ebe7" // palest red
+  palestRed: "#f6ebe7", // palest red
+  brown: "#797062",
+  darkBrown: '#080808',
+  yellowBrown: '#ACA37A',
+  yellow: '#E6E655'
 };
 
 const colors = {
-  primary: brand.black,
-  secondary: brand.darkGray,
-  tertiary: brand.lightGray,
-  quartenary: brand.white
+  primary: brand.yellow,
+  secondary: brand.brown,
+  tertiary: brand.yellowBrown,
+  quartenary: brand.darkBrown
 };
 
 const fonts = {
-  heading: "'Poppins', 'Century Gothic', 'Helvetica Neue', Helvetica, sans-serif",
-  body: "'Source Serif Pro', serif",
+  heading: "'Montserrat', sans-serif",
+  body: "'Montserrat', serif",
   monospace: "'akkurta', 'Inconsolata', Consolas, 'Lucida Console', 'Lucida Sans Typewriter', 'DejaVu Sans Mono', 'Bitstream Vera Sans Mono', 'Liberation Mono', Monaco, Courier, monospace"
 };
 
@@ -43,7 +47,7 @@ export default {
       fontFamily: fonts.body,
       fontWeight: "normal",
       fontSize: "2em",
-      color: colors.primary,
+      color: brand.white,
       overflow: "hidden"
     },
     "html, body": {
@@ -68,7 +72,7 @@ export default {
       outline: 0
     },
     prevIcon: {
-      fill: colors.primary
+      fill: brand.white
     },
     next: {
       position: "absolute",
@@ -81,7 +85,7 @@ export default {
       outline: 0
     },
     nextIcon: {
-      fill: colors.primary
+      fill: brand.white
     }
   },
   progress: {
@@ -199,7 +203,7 @@ export default {
         maxWidth: 800
       },
       code: {
-        color: brand.darkerGray,
+        color: colors.primary,
         textAlign: "left",
         fontFamily: fonts.monospace,
         fontWeight: "normal"
@@ -236,7 +240,7 @@ export default {
         margin: 0
       },
       h3: {
-        color: brand.darkerGray,
+        color: colors.primary,
         fontSize: "4.9rem",
         fontFamily: fonts.heading,
         fontWeight: 600,
@@ -244,7 +248,7 @@ export default {
         margin: "0.25rem auto"
       },
       h4: {
-        color: brand.darkerGray,
+        color: colors.primary,
         fontSize: "3.82rem",
         fontFamily: fonts.heading,
         fontWeight: 600,
@@ -252,7 +256,7 @@ export default {
         margin: "0.25rem auto"
       },
       h5: {
-        color: brand.darkerGray,
+        color: colors.primary,
         fontSize: "3.19rem",
         fontFamily: fonts.heading,
         fontWeight: 600,
@@ -260,7 +264,7 @@ export default {
         margin: "0.25rem auto"
       },
       h6: {
-        color: brand.darkerGray,
+        color: colors.primary,
         fontSize: "2.66rem",
         fontFamily: fonts.heading,
         fontWeight: 600,
@@ -297,7 +301,7 @@ export default {
       width: "100%"
     },
     text: {
-      color: colors.primary,
+      color: brand.white,
       fontSize: "2rem",
       fontFamily: fonts.body,
       lineHeight: 1.3,
