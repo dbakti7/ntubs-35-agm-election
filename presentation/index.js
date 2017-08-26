@@ -1,5 +1,5 @@
 // Import React
-import React from "react";
+import React from 'react'
 
 // Import Spectacle Core tags
 import {
@@ -7,38 +7,42 @@ import {
   Cite,
   Deck,
   Fill,
-  Fit,
+  // Fit,
   Heading,
-  Image,
+  // Image,
   Layout,
-  Link,
+  // Link,
   ListItem,
   List,
   Quote,
   Slide,
   Text,
-  Appear,
-  SlideSet
-} from "spectacle";
+  // Appear,
+  SlideSet,
+  Table,
+  TableHeaderItem,
+  TableItem,
+  TableRow
+} from 'spectacle'
 
-import Card from "./card";
+import Card from './card'
 
 // Import image preloader util
-import preloader from "spectacle/lib/utils/preloader";
+// import preloader from 'spectacle/lib/utils/preloader'
 
 // Import theme
 // import createTheme from "spectacle/lib/themes/default";
-import theme from "../themes/formidable/index.js";
+import theme from '../themes/formidable/index.js'
 
 // Require CSS
-require("normalize.css");
-require("spectacle/lib/themes/default/index.css");
-require("../themes/formidable/index.css");
+require('normalize.css')
+require('spectacle/lib/themes/default/index.css')
+require('../themes/formidable/index.css')
 // Best way to include fonts rite
 // require("../fonts/worksans.css");
 // require("../fonts/biorhyme.css");
 // require("../fonts/silkscreen.css");
-require("../fonts/montserrat.css");
+require('../fonts/montserrat.css')
 
 // const images = {
 //   bg: require("../assets/bg_skyline.svg"),
@@ -49,35 +53,115 @@ require("../fonts/montserrat.css");
 
 export default class Presentation extends React.Component {
   constructor(props) {
-    super(props);
+    super(props)
+    this.renderVotingInput = this.renderVotingInput.bind(this)
     this.state = {
       election: {
-        President: [
-          { name: "Elmer Augustinus Trisno", yes: 0, no: 0, abstain: 0 }
-        ],
-        "Vice President (Event)": [
-          { name: "Tan Jun Guang Dedrick", yes: 0, no: 0, abstain: 0 }
-        ],
-        "Vice President (Dharma)": [
-          { name: "Ong Zhi Huang", yes: 0, no: 0, abstain: 0 }
-        ],
-        "Honorary General Secretary": [
-          { name: "Michelle Trisno", yes: 0, no: 0, abstain: 0 }
-        ]
+        President: {
+          candidate: 'Elmer Augustinus Trisno',
+          votingData: [
+            { yes: 0, no: 0, abstain: 0 }, // one for each section
+            { yes: 0, no: 0, abstain: 0 },
+            { yes: 0, no: 0, abstain: 0 },
+            { yes: 0, no: 0, abstain: 0 },
+            { yes: 0, no: 0, abstain: 0 }
+          ]
+        },
+        'Vice President (Event)': {
+          candidate: 'Tan Jun Guang Dedrick',
+          votingData: [
+            { yes: 0, no: 0, abstain: 0 },
+            { yes: 0, no: 0, abstain: 0 },
+            { yes: 0, no: 0, abstain: 0 },
+            { yes: 0, no: 0, abstain: 0 },
+            { yes: 0, no: 0, abstain: 0 }
+          ]
+        },
+        'Vice President (Dharma)': {
+          candidate: 'Ong Zhi Huang',
+          votingData: [
+            { yes: 0, no: 0, abstain: 0 },
+            { yes: 0, no: 0, abstain: 0 },
+            { yes: 0, no: 0, abstain: 0 },
+            { yes: 0, no: 0, abstain: 0 },
+            { yes: 0, no: 0, abstain: 0 }
+          ]
+        },
+        'Honorary General Secretary': {
+          candidate: 'Michelle Trisno',
+          votingData: [
+            { yes: 0, no: 0, abstain: 0 },
+            { yes: 0, no: 0, abstain: 0 },
+            { yes: 0, no: 0, abstain: 0 },
+            { yes: 0, no: 0, abstain: 0 },
+            { yes: 0, no: 0, abstain: 0 }
+          ]
+        }
       }
-    };
+    }
   }
   renderElection() {
-    const positions = Object.keys(this.state.election);
-    return positions.map((position) => {
-      const candidates = this.state.election[position];
-      if (candidates.length === 1) {
-        return this.renderCandidate(candidates[0].name, position);
+    const positions = Object.keys(this.state.election)
+    return positions.map(position => {
+      const positionData = this.state.election[position]
+      if (positionData.candidate) {
+        return this.renderCandidateSingle(
+          positionData.candidate,
+          position,
+          positionData.votingData
+        )
       }
-      return this.renderCandidate(candidates[0].name, position);
-    });
+      // Multiple candidate!
+      return null
+    })
   }
-  renderCandidate(name, position) {
+  renderVotingInput(value, position, kind = 'yes', section = 0) {
+    return (
+      <input
+        type="number"
+        value={value}
+        onChange={e => {
+          const newValue = parseInt(e.target.value, 10)
+          this.setState({
+            election: {
+              ...this.state.election,
+              [position]: {
+                ...this.state.election[position],
+                votingData: [
+                  ...this.state.election[position].votingData.slice(0, section),
+                  {
+                    ...this.state.election[position].votingData[section],
+                    [kind]: newValue
+                  },
+                  ...this.state.election[position].votingData.slice(section + 1)
+                ]
+              }
+            }
+          })
+        }}
+      />
+    )
+  }
+  renderCandidateSingle(name, position, votingData) {
+    const getTotal = type => {
+      return votingData.reduce((prevValue, votingSectionData) => {
+        return votingSectionData[type] + prevValue
+      }, 0)
+    }
+    const totalYes = getTotal('yes')
+    const totalNo = getTotal('no')
+    const totalAbstain = getTotal('abstain')
+    const totalVote = totalYes + totalNo + totalAbstain
+    const percentageYes = totalVote
+      ? Math.round(totalYes * 10000 / totalVote) / 100
+      : 0
+    const percentageNo = totalVote
+      ? Math.round(totalNo * 10000 / totalVote) / 100
+      : 0
+    const percentageAbstain = totalVote
+      ? Math.round(totalAbstain * 10000 / totalVote) / 100
+      : 0
+
     return (
       <SlideSet key={name}>
         <Slide>
@@ -102,15 +186,108 @@ export default class Presentation extends React.Component {
             Candidate: {name}
           </Text>
         </Slide>
+        <Slide>
+          <Heading caps size={5}>
+            Voting
+          </Heading>
+          <Table>
+            <TableRow>
+              <TableHeaderItem />
+              <TableHeaderItem>
+                <Card color="green" />
+                <Text>For</Text>
+              </TableHeaderItem>
+              <TableHeaderItem>
+                <Card color="red" />
+                <Text>Against</Text>
+              </TableHeaderItem>
+              <TableHeaderItem>
+                <Card color="black" />
+                <Text>Abstain</Text>
+              </TableHeaderItem>
+            </TableRow>
+            {votingData.map((votingSectionData, index) => {
+              return (
+                <TableRow>
+                  <TableItem className="noLineBreak">
+                    Section {['A', 'B', 'C', 'D', 'E'][index]}
+                  </TableItem>
+                  <TableItem>
+                    {this.renderVotingInput(
+                      votingSectionData.yes,
+                      position,
+                      'yes',
+                      index
+                    )}
+                  </TableItem>
+                  <TableItem>
+                    {this.renderVotingInput(
+                      votingSectionData.no,
+                      position,
+                      'no',
+                      index
+                    )}
+                  </TableItem>
+                  <TableItem>
+                    {this.renderVotingInput(
+                      votingSectionData.abstain,
+                      position,
+                      'abstain',
+                      index
+                    )}
+                  </TableItem>
+                </TableRow>
+              )
+            })}
+            <TableRow>
+              <TableItem className="totalPercentage">Total</TableItem>
+              <TableItem className="totalPercentage">
+                {totalYes}{' '}
+                <span className="smaller">({percentageYes.toFixed(2)}%)</span>
+              </TableItem>
+              <TableItem className="totalPercentage">
+                {totalNo}{' '}
+                <span className="smaller">({percentageNo.toFixed(2)}%)</span>
+              </TableItem>
+              <TableItem className="totalPercentage">
+                {totalAbstain}{' '}
+                <span className="smaller">
+                  ({percentageAbstain.toFixed(2)}%)
+                </span>
+              </TableItem>
+            </TableRow>
+          </Table>
+        </Slide>
+        <Slide>
+          <Heading caps size={4}>
+            Voting Result
+          </Heading>
+          <Text size={4}>
+            {name}
+          </Text>
+          <Text caps>
+            {`is ${[
+              'President',
+              'Vice President (Event)',
+              'Vice President (Dharma)',
+              'Honorary General Secretary'
+            ].indexOf(position) > -1
+              ? percentageYes >= 60 ? 'elected' : 'not elected'
+              : percentageYes > 50 ? 'elected' : 'not elected'}`}
+          </Text>
+          <Text>
+            as {position}
+          </Text>
+        </Slide>
       </SlideSet>
-    );
+    )
   }
   render() {
     return (
       <Deck
         progress="none"
         theme={theme}
-        transition={["fade"]}
+        transition={['fade']}
         transitionDuration={500}
       >
         <Slide>
@@ -123,14 +300,21 @@ export default class Presentation extends React.Component {
           <List>
             <ListItem>Chairperson: Kenrick</ListItem>
             <ListItem>Secretary/Time keeper: Rizky Wirawan Pratama</ListItem>
-            <ListItem>Escord: Someone</ListItem>
+            <ListItem>Escort: Peter</ListItem>
             <ListItem>
               Vote counters:
               <List>
-                <ListItem>Item 1</ListItem>
-                <ListItem>Item 2</ListItem>
-                <ListItem>Item 3</ListItem>
-                <ListItem>Item 4</ListItem>
+                <ListItem>Aryani Paramita</ListItem>
+                <ListItem>Benny Febriansyah</ListItem>
+                <ListItem>Evando</ListItem>
+                <ListItem>Handoko</ListItem>
+                <ListItem>Jefferson</ListItem>
+                <ListItem>Kang Chun Hee</ListItem>
+                <ListItem>Le Quang Luan</ListItem>
+                <ListItem>Lee Su Ann</ListItem>
+                <ListItem>Naing Htoo Aung</ListItem>
+                <ListItem>Robert Liono</ListItem>
+                <ListItem>Tew Hong Boon</ListItem>
               </List>
             </ListItem>
           </List>
@@ -298,26 +482,42 @@ export default class Presentation extends React.Component {
         </Slide>
         <Slide>
           <Heading caps size={6}>
-            Additional election rules
+            New Committee Taking Office
           </Heading>
-          <List>
-            <ListItem>
-              At least one half of the committee members of the Management
-              Committee (including President) must be elected during the
-              election, for the committee to take office.
-            </ListItem>
-            <ListItem>
-              The tenure of office bearers shall be one academic year.
-            </ListItem>
-          </List>
+          <Text>
+            At least one half of the committee members of the Management
+            Committee (including President) must be elected during the election,
+            for the committee to take office.
+          </Text>
         </Slide>
         <Slide>
-          <Heading>
-            Election
+          <Heading caps size={6}>
+            Tenure
           </Heading>
+          <Quote>
+            The tenure of office bearers shall be one academic year.
+          </Quote>
+          <Cite>NTUBS Constitution: VI, 2(c)</Cite>
+        </Slide>
+        <Slide>
+          <Heading caps size={6}>
+            Co-opt Members for Management Committee
+          </Heading>
+          <BlockQuote>
+            <Text>
+              The Management Committee have the power to appoint members to fill
+              any vacancy that may occur in the Management Committee during its
+              term of office in an acting capacity until the next Annual General
+              Meeting
+            </Text>
+            <Cite>NTUBS Constitution: VI, 5 (b)</Cite>
+          </BlockQuote>
+        </Slide>
+        <Slide>
+          <Heading>Election</Heading>
         </Slide>
         {this.renderElection()}
       </Deck>
-    );
+    )
   }
 }
