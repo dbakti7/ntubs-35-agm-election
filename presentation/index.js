@@ -234,17 +234,87 @@ export default class Presentation extends React.Component {
         </Slide>
         <Slide>
           <Heading caps size={6}>
-            NTUBS 35th AGM Election
+            Voting Procedure: Multiple Candidates
           </Heading>
-          <Text>Multiple candidates</Text>
           <Layout>
             <Fill>
-              <Text>Something 1</Text>
+              <Card color="blue" />
+              <Text>For Candidate 1</Text>
             </Fill>
             <Fill>
-              <Text>Something</Text>
+              <Card color="yellow" />
+              <Text>For Candidate 2</Text>
+            </Fill>
+            <Fill>
+              <Card color="black" />
+              <Text>Abstain</Text>
             </Fill>
           </Layout>
+        </Slide>
+        <Slide>
+          <Heading caps size={6}>
+            Election criteria: Single candidate
+          </Heading>
+          <List>
+            <ListItem>Three types of votes: For, Against, and Abstain</ListItem>
+            <ListItem>
+              For President/VPs/HGS, the number of "For" votes must be at least
+              60% (≥ 60%) of total votes.
+            </ListItem>
+            <ListItem>
+              For other positions, the number of "For" votes must be more than
+              50% (>50%) of total votes.
+            </ListItem>
+          </List>
+        </Slide>
+        <Slide>
+          <Heading caps size={6}>
+            Election criteria: Multiple candidates
+          </Heading>
+          <List>
+            <ListItem>Two types of votes: For, and Abstain</ListItem>
+            <ListItem>Elected if "For" votes >50%</ListItem>
+            <ListItem>
+              Elected if "For" votes &lt;50%, "Abstain" votes &lt;40%, and
+              obtains more "For" votes than other candidates, i.e. not tied.
+            </ListItem>
+          </List>
+        </Slide>
+        <Slide>
+          <Heading caps size={6}>
+            Election criteria: Multiple candidates ("For" votes &lt;50%,
+            "Abstain" votes &lt;40%, and tied)
+          </Heading>
+          <List>
+            <ListItem>
+              If tied: 2-candidate scenario: both not elected.
+            </ListItem>
+            <ListItem>
+              If tied: >2-candidate sencario: 2nd round voting for tied
+              candidates only. If in 2nd round both has equal 50% "For" votes,
+              both not elected.
+            </ListItem>
+          </List>
+        </Slide>
+        <Slide>
+          <Heading caps size={6}>
+            Additional election rules
+          </Heading>
+          <List>
+            <ListItem>
+              At least one half of the committee members of the Management
+              Committee (including President) must be elected during the
+              election, for the committee to take office.
+            </ListItem>
+            <ListItem>
+              The tenure of office bearers shall be one academic year.
+            </ListItem>
+          </List>
+        </Slide>
+        <Slide>
+          <Heading>
+            Election
+          </Heading>
         </Slide>
         {this.renderElection()}
       </Deck>
