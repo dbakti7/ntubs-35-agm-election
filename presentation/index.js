@@ -56,6 +56,12 @@ const getTotal = (votingData, type) => {
   }, 0)
 }
 
+const constructInitialVotingData = () => {
+  return [1, 2, 3, 4, 5].map(() => {
+    return { yes: 0, no: 0, abstain: 0 };
+  })
+}
+
 export default class Presentation extends React.Component {
   constructor(props) {
     super(props)
@@ -75,43 +81,55 @@ export default class Presentation extends React.Component {
         // },
         President: {
           candidate: 'Elmer Augustinus Trisno',
-          votingData: [
-            { yes: 0, no: 0, abstain: 0 }, // one for each section
-            { yes: 0, no: 0, abstain: 0 },
-            { yes: 0, no: 0, abstain: 0 },
-            { yes: 0, no: 0, abstain: 0 },
-            { yes: 0, no: 0, abstain: 0 }
-          ]
+          votingData: constructInitialVotingData()
         },
         'Vice President (Event)': {
           candidate: 'Tan Jun Guang Dedrick',
-          votingData: [
-            { yes: 0, no: 0, abstain: 0 },
-            { yes: 0, no: 0, abstain: 0 },
-            { yes: 0, no: 0, abstain: 0 },
-            { yes: 0, no: 0, abstain: 0 },
-            { yes: 0, no: 0, abstain: 0 }
-          ]
+          votingData: constructInitialVotingData()
         },
         'Vice President (Dharma)': {
           candidate: 'Ong Zhi Huang',
-          votingData: [
-            { yes: 0, no: 0, abstain: 0 },
-            { yes: 0, no: 0, abstain: 0 },
-            { yes: 0, no: 0, abstain: 0 },
-            { yes: 0, no: 0, abstain: 0 },
-            { yes: 0, no: 0, abstain: 0 }
-          ]
+          votingData: constructInitialVotingData()
         },
         'Honorary General Secretary': {
           candidate: 'Michelle Trisno',
-          votingData: [
-            { yes: 0, no: 0, abstain: 0 },
-            { yes: 0, no: 0, abstain: 0 },
-            { yes: 0, no: 0, abstain: 0 },
-            { yes: 0, no: 0, abstain: 0 },
-            { yes: 0, no: 0, abstain: 0 }
-          ]
+          votingData: constructInitialVotingData()
+        },
+        'Honorary Treasurer': {
+          candidate: 'Donking Yappy',
+          votingData: constructInitialVotingData()
+        },
+        'Event Director': {
+          candidate: 'Jeffrey',
+          votingData: constructInitialVotingData()
+        },
+        'Special Project Director': {
+          candidate: 'Ryan Eka Cahaya',
+          votingData: constructInitialVotingData()
+        },
+        'Dharma Propagation Director': {
+          candidate: 'Danry Lim',
+          votingData: constructInitialVotingData()
+        },
+        'Fellowship Director': {
+          candidate: 'Lee Yi Wei',
+          votingData: constructInitialVotingData()
+        },
+        'Publication Director': {
+          candidate: 'Willson Nicholas',
+          votingData: constructInitialVotingData()
+        },
+        'Welfare Director': {
+          candidate: 'Andre Yoga',
+          votingData: constructInitialVotingData()
+        },
+        'Resource Director': {
+          candidate: 'Erik Angtoni',
+          votingData: constructInitialVotingData()
+        },
+        'External Liason Director': {
+          candidate: 'Soh Yan Da',
+          votingData: constructInitialVotingData()
         }
       }
     }
