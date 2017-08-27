@@ -50,6 +50,11 @@ require('../fonts/montserrat.css')
 // };
 
 // preloader(images);
+const getTotal = (votingData, type) => {
+  return votingData.reduce((prevValue, votingSectionData) => {
+    return votingSectionData[type] + prevValue
+  }, 0)
+}
 
 export default class Presentation extends React.Component {
   constructor(props) {
@@ -57,6 +62,16 @@ export default class Presentation extends React.Component {
     this.renderVotingInput = this.renderVotingInput.bind(this)
     this.state = {
       election: {
+        Chairperson: {
+          candidates: ['A', 'B'],
+          votingData: [
+            { yes0: 0, yes1: 0, abstain: 0 }, // one for each section
+            { yes0: 0, yes1: 0, abstain: 0 },
+            { yes0: 0, yes1: 0, abstain: 0 },
+            { yes0: 0, yes1: 0, abstain: 0 },
+            { yes0: 0, yes1: 0, abstain: 0 }
+          ]
+        },
         President: {
           candidate: 'Elmer Augustinus Trisno',
           votingData: [
@@ -111,7 +126,13 @@ export default class Presentation extends React.Component {
           positionData.votingData
         )
       }
-      // Multiple candidate!
+      if (positionData.candidates) {
+        return this.renderCandidateMultiple(
+          positionData.candidates,
+          position,
+          positionData.votingData
+        )
+      }
       return null
     })
   }
@@ -143,14 +164,9 @@ export default class Presentation extends React.Component {
     )
   }
   renderCandidateSingle(name, position, votingData) {
-    const getTotal = type => {
-      return votingData.reduce((prevValue, votingSectionData) => {
-        return votingSectionData[type] + prevValue
-      }, 0)
-    }
-    const totalYes = getTotal('yes')
-    const totalNo = getTotal('no')
-    const totalAbstain = getTotal('abstain')
+    const totalYes = getTotal(votingData, 'yes')
+    const totalNo = getTotal(votingData, 'no')
+    const totalAbstain = getTotal(votingData, 'abstain')
     const totalVote = totalYes + totalNo + totalAbstain
     const percentageYes = totalVote
       ? Math.round(totalYes * 10000 / totalVote) / 100
@@ -163,7 +179,7 @@ export default class Presentation extends React.Component {
       : 0
 
     return (
-      <SlideSet key={name}>
+      <SlideSet key={position}>
         <Slide>
           <Heading caps size={5}>
             Election Speech
@@ -208,7 +224,7 @@ export default class Presentation extends React.Component {
             </TableRow>
             {votingData.map((votingSectionData, index) => {
               return (
-                <TableRow>
+                <TableRow key={index}>
                   <TableItem className="noLineBreak">
                     Section {['A', 'B', 'C', 'D', 'E'][index]}
                   </TableItem>
@@ -282,6 +298,162 @@ export default class Presentation extends React.Component {
       </SlideSet>
     )
   }
+  renderCandidateMultiple(names, position, votingData) {
+    return null
+    const colors = ['blue', 'yellow', 'green', 'red']
+
+    const totalYesPerCandidate = names.map((name, index) => {
+      return getTotal(votingData, 'yes' + index)
+    })
+    const totalYes = totalYesPerCandidate.reduce(
+      (prevValue, currentValue) => prevValue + currentValue,
+      0
+    )
+
+    const totalAbstain = getTotal(votingData, 'abstain')
+    const totalVote = totalYes + totalAbstain
+
+    const percentageYesPerCandidate = names.map((name, index) => {
+      return totalVote
+        ? Math.round(totalYesPerCandidate[index] * 10000 / totalVote) / 100
+        : 0
+    })
+    const percentageAbstain = totalVote
+      ? Math.round(totalAbstain * 10000 / totalVote) / 100
+      : 0
+
+    const speechQaSlides = []
+    names.forEach(name => {
+      speechQaSlides.push(
+        <Slide key={'speech' + name}>
+          <Heading caps size={5}>
+            Election Speech
+          </Heading>
+          <Heading caps size={6}>
+            {position}
+          </Heading>
+          <Text>
+            Candidate: {name}
+          </Text>
+        </Slide>
+      )
+      speechQaSlides.push(
+        <Slide key={'qa' + name}>
+          <Heading caps size={5}>
+            Question &amp; Answer
+          </Heading>
+          <Heading caps size={6}>
+            {position}
+          </Heading>
+          <Text>
+            Candidate: {name}
+          </Text>
+        </Slide>
+      )
+    })
+
+    return (
+      <SlideSet key={position}>
+        {speechQaSlides}
+        <Slide>
+          <Heading caps size={5}>
+            Voting
+          </Heading>
+          <Table>
+            <TableRow>
+              <TableHeaderItem />
+              {names.map((name, index) => {
+                return (
+                  <TableHeaderItem key={name}>
+                    <Card color={colors[index % 4]} />
+                    <Text>
+                      For {name}
+                    </Text>
+                  </TableHeaderItem>
+                )
+              })}
+              <TableHeaderItem>
+                <Card color="black" />
+                <Text>Abstain</Text>
+              </TableHeaderItem>
+            </TableRow>
+            {votingData.map((votingSectionData, index) => {
+              return (
+                <TableRow key={index}>
+                  <TableItem className="noLineBreak">
+                    Section {['A', 'B', 'C', 'D', 'E'][index]}
+                  </TableItem>
+                  {names.map((name, index) => {
+                    return (
+                      <TableItem key={name}>
+                        {this.renderVotingInput(
+                          votingSectionData['yes' + index],
+                          position,
+                          'yes' + index,
+                          index
+                        )}
+                      </TableItem>
+                    )
+                  })}
+                  <TableItem>
+                    {this.renderVotingInput(
+                      votingSectionData.abstain,
+                      position,
+                      'abstain',
+                      index
+                    )}
+                  </TableItem>
+                </TableRow>
+              )
+            })}
+            <TableRow>
+              <TableItem className="totalPercentage">Total</TableItem>
+
+              {names.map((name, index) => {
+                return (
+                  <TableItem key={name} className="totalPercentage">
+                    {totalYes}{' '}
+                    <span className="smaller">
+                      ({percentageYesPerCandidate[index].toFixed(2)}%)
+                    </span>
+                  </TableItem>
+                )
+              })}
+
+              <TableItem className="totalPercentage">
+                {totalAbstain}{' '}
+                <span className="smaller">
+                  ({percentageAbstain.toFixed(2)}%)
+                </span>
+              </TableItem>
+            </TableRow>
+          </Table>
+        </Slide>
+        {/* <Slide>
+          <Heading caps size={4}>
+            Voting Result
+          </Heading>
+          <Text size={4}>
+            {name}
+          </Text>
+          <Text caps>
+            {`is ${[
+              'President',
+              'Vice President (Event)',
+              'Vice President (Dharma)',
+              'Honorary General Secretary'
+            ].indexOf(position) > -1
+              ? percentageYes >= 60 ? 'elected' : 'not elected'
+              : percentageYes > 50 ? 'elected' : 'not elected'}`}
+          </Text>
+          <Text>
+            as {position}
+          </Text>
+        </Slide> */}
+      </SlideSet>
+    )
+  }
+
   render() {
     return (
       <Deck
