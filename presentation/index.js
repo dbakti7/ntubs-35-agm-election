@@ -62,16 +62,16 @@ export default class Presentation extends React.Component {
     this.renderVotingInput = this.renderVotingInput.bind(this)
     this.state = {
       election: {
-        Chairperson: {
-          candidates: ['A', 'B'],
-          votingData: [
-            { yes0: 0, yes1: 0, abstain: 0 }, // one for each section
-            { yes0: 0, yes1: 0, abstain: 0 },
-            { yes0: 0, yes1: 0, abstain: 0 },
-            { yes0: 0, yes1: 0, abstain: 0 },
-            { yes0: 0, yes1: 0, abstain: 0 }
-          ]
-        },
+        // 'Some important position': {
+        //   candidates: ['A', 'B'],
+        //   votingData: [
+        //     { yes0: 0, yes1: 0, abstain: 0 }, // one for each section
+        //     { yes0: 0, yes1: 0, abstain: 0 },
+        //     { yes0: 0, yes1: 0, abstain: 0 },
+        //     { yes0: 0, yes1: 0, abstain: 0 },
+        //     { yes0: 0, yes1: 0, abstain: 0 }
+        //   ]
+        // },
         President: {
           candidate: 'Elmer Augustinus Trisno',
           votingData: [
@@ -141,6 +141,8 @@ export default class Presentation extends React.Component {
       <input
         type="number"
         value={value}
+        min={0}
+        step={1}
         onChange={e => {
           const newValue = parseInt(e.target.value, 10)
           this.setState({
@@ -179,7 +181,7 @@ export default class Presentation extends React.Component {
       : 0
 
     return (
-      <SlideSet key={position}>
+      <SlideSet key={position} id={position}>
         <Slide>
           <Heading caps size={5}>
             Election Speech
@@ -300,6 +302,7 @@ export default class Presentation extends React.Component {
   }
   renderCandidateMultiple(names, position, votingData) {
     return null
+    // TODO: Bug with library
     const colors = ['blue', 'yellow', 'green', 'red']
 
     const totalYesPerCandidate = names.map((name, index) => {
@@ -351,9 +354,9 @@ export default class Presentation extends React.Component {
         </Slide>
       )
     })
-
+    
     return (
-      <SlideSet key={position}>
+      <SlideSet key={position} id={position}>
         {speechQaSlides}
         <Slide>
           <Heading caps size={5}>
@@ -383,13 +386,13 @@ export default class Presentation extends React.Component {
                   <TableItem className="noLineBreak">
                     Section {['A', 'B', 'C', 'D', 'E'][index]}
                   </TableItem>
-                  {names.map((name, index) => {
+                  {names.map((name, nameIndex) => {
                     return (
                       <TableItem key={name}>
                         {this.renderVotingInput(
-                          votingSectionData['yes' + index],
+                          votingSectionData['yes' + nameIndex],
                           position,
-                          'yes' + index,
+                          'yes' + nameIndex,
                           index
                         )}
                       </TableItem>
@@ -412,7 +415,7 @@ export default class Presentation extends React.Component {
               {names.map((name, index) => {
                 return (
                   <TableItem key={name} className="totalPercentage">
-                    {totalYes}{' '}
+                    {totalYesPerCandidate[index]}{' '}
                     <span className="smaller">
                       ({percentageYesPerCandidate[index].toFixed(2)}%)
                     </span>
