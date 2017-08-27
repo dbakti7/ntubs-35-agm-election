@@ -60,6 +60,7 @@ export default class Presentation extends React.Component {
   constructor(props) {
     super(props)
     this.renderVotingInput = this.renderVotingInput.bind(this)
+    this.localStoreKey = 'NTUBS-AGM-35-election-data'
     this.state = {
       election: {
         // 'Some important position': {
@@ -113,6 +114,29 @@ export default class Presentation extends React.Component {
           ]
         }
       }
+    }
+  }
+  componentDidMount() {
+    // Read from local storage
+    if (window && window.localStorage) {
+      const store = window.localStorage.getItem(this.localStoreKey)
+      if (store) {
+        try {
+          const tempState = JSON.parse(store)
+          this.setState(tempState)
+        } catch (e) {
+          console.error("Local store state isn't a valid JSON")
+        }
+      }
+    }
+  }
+  componentDidUpdate() {
+    // Save to local storage
+    if (window && window.localStorage) {
+      window.localStorage.setItem(
+        this.localStoreKey,
+        JSON.stringify(this.state)
+      )
     }
   }
   renderElection() {
@@ -354,7 +378,7 @@ export default class Presentation extends React.Component {
         </Slide>
       )
     })
-    
+
     return (
       <SlideSet key={position} id={position}>
         {speechQaSlides}
