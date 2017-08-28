@@ -99,16 +99,16 @@ export default class Presentation extends React.Component {
           candidate: 'Donking Yappy',
           votingData: constructInitialVotingData()
         },
+        'External Liason Director': {
+          candidate: 'Soh Yan Da',
+          votingData: constructInitialVotingData()
+        },
         'Event Director': {
           candidate: 'Jeffrey',
           votingData: constructInitialVotingData()
         },
         'Special Project Director': {
           candidate: 'Ryan Eka Cahaya',
-          votingData: constructInitialVotingData()
-        },
-        'Dharma Propagation Director': {
-          candidate: 'Danry Lim',
           votingData: constructInitialVotingData()
         },
         'Fellowship Director': {
@@ -119,16 +119,20 @@ export default class Presentation extends React.Component {
           candidate: 'Willson Nicholas',
           votingData: constructInitialVotingData()
         },
-        'Welfare Director': {
-          candidate: 'Andre Yoga',
+        'Dharma Propagation Director': {
+          candidate: 'Danry Lim',
+          votingData: constructInitialVotingData()
+        },
+        'Marketing Director': {
+          candidate: 'Willis Chailim',
           votingData: constructInitialVotingData()
         },
         'Resource Director': {
           candidate: 'Erik Angtoni',
           votingData: constructInitialVotingData()
         },
-        'External Liason Director': {
-          candidate: 'Soh Yan Da',
+        'Welfare Director': {
+          candidate: 'Andre Yoga',
           votingData: constructInitialVotingData()
         }
       }
