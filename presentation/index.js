@@ -58,7 +58,7 @@ const getTotal = (votingData, type) => {
 
 const constructInitialVotingData = () => {
   return [1, 2, 3, 4, 5].map(() => {
-    return { yes: 0, no: 0, abstain: 0 };
+    return { yes: 0, no: 0, abstain: 0 }
   })
 }
 
@@ -66,6 +66,9 @@ export default class Presentation extends React.Component {
   constructor(props) {
     super(props)
     this.renderVotingInput = this.renderVotingInput.bind(this)
+    this.renderElection = this.renderElection.bind(this)
+    this.renderPreElection = this.renderPreElection.bind(this)
+    this.renderPostElection = this.renderPostElection.bind(this)
     this.localStoreKey = 'NTUBS-AGM-35-election-data'
     this.state = {
       election: {
@@ -160,6 +163,45 @@ export default class Presentation extends React.Component {
         JSON.stringify(this.state)
       )
     }
+  }
+  renderPreElection() {
+    const positions = Object.keys(this.state.election)
+    return (
+      <Slide>
+        <Heading caps size={5}>
+          Order of Elections
+        </Heading>
+        <List>
+          {positions.map(position => {
+            return (
+              <ListItem key={position}>
+                {position}
+              </ListItem>
+            )
+          })}
+        </List>
+      </Slide>
+    )
+  }
+  renderPostElection() {
+    const positions = Object.keys(this.state.election)
+    // TODO: list down who is succesful in getting position
+    return (
+      <Slide>
+        <Heading size={5}>
+          35<sup>th</sup> Management Committee
+        </Heading>
+        <List>
+          {positions.map(position => {
+            return (
+              <ListItem key={position}>
+                {position}
+              </ListItem>
+            )
+          })}
+        </List>
+      </Slide>
+    )
   }
   renderElection() {
     const positions = Object.keys(this.state.election)
@@ -737,7 +779,9 @@ export default class Presentation extends React.Component {
         <Slide>
           <Heading>Election</Heading>
         </Slide>
+        {this.renderPreElection()}
         {this.renderElection()}
+        {this.renderPostElection()}
       </Deck>
     )
   }
