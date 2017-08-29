@@ -62,6 +62,24 @@ const constructInitialVotingData = () => {
   })
 }
 
+const isCandidateElected = (votingData, position) => {
+  const totalYes = getTotal(votingData, 'yes')
+  const totalNo = getTotal(votingData, 'no')
+  const totalAbstain = getTotal(votingData, 'abstain')
+  const totalVote = totalYes + totalNo + totalAbstain
+  const percentageYes = totalVote
+    ? Math.round(totalYes * 10000 / totalVote) / 100
+    : 0
+  return [
+    'President',
+    'Vice President (Event)',
+    'Vice President (Dharma)',
+    'Honorary General Secretary'
+  ].indexOf(position) > -1
+    ? percentageYes >= 60
+    : percentageYes > 50
+}
+
 export default class Presentation extends React.Component {
   constructor(props) {
     super(props)
@@ -189,15 +207,21 @@ export default class Presentation extends React.Component {
     return (
       <Slide>
         <Heading size={5}>
-          35<sup>th</sup> Management Committee
+          35<sup>th</sup> AGM Election Result
         </Heading>
         <List>
           {positions.map(position => {
-            return (
-              <ListItem key={position}>
-                {position}
-              </ListItem>
-            )
+            const positionData = this.state.election[position]
+            if (positionData.candidate) {
+              const isElected = isCandidateElected(positionData.votingData, position)
+              return (
+                <ListItem key={position}>
+                  {position}: {isElected ? positionData.candidate : '<empty>'}
+                </ListItem>
+              )
+            }
+            return null
+            
           })}
         </List>
       </Slide>
@@ -267,6 +291,7 @@ export default class Presentation extends React.Component {
     const percentageAbstain = totalVote
       ? Math.round(totalAbstain * 10000 / totalVote) / 100
       : 0
+    const isElected = isCandidateElected(votingData, position)
 
     return (
       <SlideSet key={position} id={position}>
@@ -296,6 +321,9 @@ export default class Presentation extends React.Component {
           <Heading caps size={5}>
             Voting
           </Heading>
+          <Text>
+            {name} for {position}
+          </Text>
           <Table>
             <TableRow>
               <TableHeaderItem />
@@ -363,27 +391,28 @@ export default class Presentation extends React.Component {
               </TableItem>
             </TableRow>
           </Table>
+          <Text>
+            Is Elected? {isElected ? 'Yes' : 'No'}
+          </Text>
         </Slide>
         <Slide>
           <Heading caps size={4}>
             Voting Result
           </Heading>
-          <Text size={4}>
-            {name}
-          </Text>
-          <Text caps>
-            {`is ${[
-              'President',
-              'Vice President (Event)',
-              'Vice President (Dharma)',
-              'Honorary General Secretary'
-            ].indexOf(position) > -1
-              ? percentageYes >= 60 ? 'elected' : 'not elected'
-              : percentageYes > 50 ? 'elected' : 'not elected'}`}
-          </Text>
-          <Text>
-            as {position}
-          </Text>
+
+          <Layout>
+            <Fill>
+              <Text>
+                {name}
+              </Text>
+              <Text caps bold>
+                {`is ${isElected ? 'elected' : 'not elected'}`}
+              </Text>
+              <Text>
+                as {position}
+              </Text>
+            </Fill>
+          </Layout>
         </Slide>
       </SlideSet>
     )
