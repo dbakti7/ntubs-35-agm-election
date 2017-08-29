@@ -22,7 +22,9 @@ import {
   Table,
   TableHeaderItem,
   TableItem,
-  TableRow
+  TableRow,
+  TableHeader,
+  TableBody
 } from 'spectacle'
 
 import Card from './card'
@@ -213,7 +215,10 @@ export default class Presentation extends React.Component {
           {positions.map(position => {
             const positionData = this.state.election[position]
             if (positionData.candidate) {
-              const isElected = isCandidateElected(positionData.votingData, position)
+              const isElected = isCandidateElected(
+                positionData.votingData,
+                position
+              )
               return (
                 <ListItem key={position}>
                   {position}: {isElected ? positionData.candidate : '<empty>'}
@@ -221,7 +226,6 @@ export default class Presentation extends React.Component {
               )
             }
             return null
-            
           })}
         </List>
       </Slide>
@@ -325,71 +329,75 @@ export default class Presentation extends React.Component {
             {name} for {position}
           </Text>
           <Table>
-            <TableRow>
-              <TableHeaderItem />
-              <TableHeaderItem>
-                <Card color="green" />
-                <Text>For</Text>
-              </TableHeaderItem>
-              <TableHeaderItem>
-                <Card color="red" />
-                <Text>Against</Text>
-              </TableHeaderItem>
-              <TableHeaderItem>
-                <Card color="black" />
-                <Text>Abstain</Text>
-              </TableHeaderItem>
-            </TableRow>
-            {votingData.map((votingSectionData, index) => {
-              return (
-                <TableRow key={index}>
-                  <TableItem className="noLineBreak">
-                    Section {['A', 'B', 'C', 'D', 'E'][index]}
-                  </TableItem>
-                  <TableItem>
-                    {this.renderVotingInput(
-                      votingSectionData.yes,
-                      position,
-                      'yes',
-                      index
-                    )}
-                  </TableItem>
-                  <TableItem>
-                    {this.renderVotingInput(
-                      votingSectionData.no,
-                      position,
-                      'no',
-                      index
-                    )}
-                  </TableItem>
-                  <TableItem>
-                    {this.renderVotingInput(
-                      votingSectionData.abstain,
-                      position,
-                      'abstain',
-                      index
-                    )}
-                  </TableItem>
-                </TableRow>
-              )
-            })}
-            <TableRow>
-              <TableItem className="totalPercentage">Total</TableItem>
-              <TableItem className="totalPercentage">
-                {totalYes}{' '}
-                <span className="smaller">({percentageYes.toFixed(2)}%)</span>
-              </TableItem>
-              <TableItem className="totalPercentage">
-                {totalNo}{' '}
-                <span className="smaller">({percentageNo.toFixed(2)}%)</span>
-              </TableItem>
-              <TableItem className="totalPercentage">
-                {totalAbstain}{' '}
-                <span className="smaller">
-                  ({percentageAbstain.toFixed(2)}%)
-                </span>
-              </TableItem>
-            </TableRow>
+            <TableHeader>
+              <TableRow>
+                <TableHeaderItem />
+                <TableHeaderItem>
+                  <Card color="green" />
+                  <Text>For</Text>
+                </TableHeaderItem>
+                <TableHeaderItem>
+                  <Card color="red" />
+                  <Text>Against</Text>
+                </TableHeaderItem>
+                <TableHeaderItem>
+                  <Card color="black" />
+                  <Text>Abstain</Text>
+                </TableHeaderItem>
+              </TableRow>
+            </TableHeader>
+            <TableBody>
+              {votingData.map((votingSectionData, index) => {
+                return (
+                  <TableRow key={index}>
+                    <TableItem className="noLineBreak">
+                      Section {['A', 'B', 'C', 'D', 'E'][index]}
+                    </TableItem>
+                    <TableItem>
+                      {this.renderVotingInput(
+                        votingSectionData.yes,
+                        position,
+                        'yes',
+                        index
+                      )}
+                    </TableItem>
+                    <TableItem>
+                      {this.renderVotingInput(
+                        votingSectionData.no,
+                        position,
+                        'no',
+                        index
+                      )}
+                    </TableItem>
+                    <TableItem>
+                      {this.renderVotingInput(
+                        votingSectionData.abstain,
+                        position,
+                        'abstain',
+                        index
+                      )}
+                    </TableItem>
+                  </TableRow>
+                )
+              })}
+              <TableRow>
+                <TableItem className="totalPercentage">Total</TableItem>
+                <TableItem className="totalPercentage">
+                  {totalYes}{' '}
+                  <span className="smaller">({percentageYes.toFixed(2)}%)</span>
+                </TableItem>
+                <TableItem className="totalPercentage">
+                  {totalNo}{' '}
+                  <span className="smaller">({percentageNo.toFixed(2)}%)</span>
+                </TableItem>
+                <TableItem className="totalPercentage">
+                  {totalAbstain}{' '}
+                  <span className="smaller">
+                    ({percentageAbstain.toFixed(2)}%)
+                  </span>
+                </TableItem>
+              </TableRow>
+            </TableBody>
           </Table>
           <Text>
             Is Elected? {isElected ? 'Yes' : 'No'}
