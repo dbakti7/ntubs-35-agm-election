@@ -32,6 +32,8 @@ import Card from './card'
 // Import image preloader util
 // import preloader from 'spectacle/lib/utils/preloader'
 
+import downloadCsv from 'download-csv'
+
 // Import theme
 // import createTheme from "spectacle/lib/themes/default";
 import theme from '../themes/formidable/index.js'
@@ -89,6 +91,7 @@ export default class Presentation extends React.Component {
     this.renderElection = this.renderElection.bind(this)
     this.renderPreElection = this.renderPreElection.bind(this)
     this.renderPostElection = this.renderPostElection.bind(this)
+    this.handleDownloadData = this.handleDownloadData.bind(this)
     this.localStoreKey = 'NTUBS-AGM-35-election-data'
     this.state = {
       election: {
@@ -203,6 +206,89 @@ export default class Presentation extends React.Component {
       </Slide>
     )
   }
+  handleDownloadData() {
+    const data = []
+    const columns = {
+      position: 'Position',
+      candidate: 'Candidate',
+      yesSectionA: 'For Votes (Section A)',
+      yesSectionB: 'For Votes (Section B)',
+      yesSectionC: 'For Votes (Section C)',
+      yesSectionD: 'For Votes (Section D)',
+      yesSectionE: 'For Votes (Section E)',
+      noSectionA: 'Against Votes (Section A)',
+      noSectionB: 'Against Votes (Section B)',
+      noSectionC: 'Against Votes (Section C)',
+      noSectionD: 'Against Votes (Section D)',
+      noSectionE: 'Against Votes (Section E)',
+      abstainSectionA: 'Abstain Votes (Section A)',
+      abstainSectionB: 'Abstain Votes (Section B)',
+      abstainSectionC: 'Abstain Votes (Section C)',
+      abstainSectionD: 'Abstain Votes (Section D)',
+      abstainSectionE: 'Abstain Votes (Section E)',
+      totalYes: 'Total For Votes',
+      totalNo: 'Total Against Votes',
+      totalAbstain: 'Total Abstain Votes',
+      totalVote: 'Total Votes',
+      percentageYes: 'Percentage For Votes',
+      percentageNo: 'Percentage Against Votes',
+      percentageAbstain: 'Percentage Abstain Votes',
+      isElected: 'Is Candidate Elected?'
+    }
+    const positions = Object.keys(this.state.election)
+    positions.forEach(position => {
+      const positionData = this.state.election[position]
+      if (positionData.candidate) {
+        const candidate = positionData.candidate
+        const votingData = positionData.votingData
+        // TODO: Refactor this voting data counting logic out
+        const totalYes = getTotal(votingData, 'yes')
+        const totalNo = getTotal(votingData, 'no')
+        const totalAbstain = getTotal(votingData, 'abstain')
+        const totalVote = totalYes + totalNo + totalAbstain
+        const percentageYes = totalVote
+          ? Math.round(totalYes * 10000 / totalVote) / 100
+          : 0
+        const percentageNo = totalVote
+          ? Math.round(totalNo * 10000 / totalVote) / 100
+          : 0
+        const percentageAbstain = totalVote
+          ? Math.round(totalAbstain * 10000 / totalVote) / 100
+          : 0
+        const isElected = isCandidateElected(votingData, position)
+        data.push({
+          position,
+          candidate,
+          yesSectionA: votingData[0].yes,
+          yesSectionB: votingData[1].yes,
+          yesSectionC: votingData[2].yes,
+          yesSectionD: votingData[3].yes,
+          yesSectionE: votingData[4].yes,
+          noSectionA: votingData[0].no,
+          noSectionB: votingData[1].no,
+          noSectionC: votingData[2].no,
+          noSectionD: votingData[3].no,
+          noSectionE: votingData[4].no,
+          abstainSectionA: votingData[0].abstain,
+          abstainSectionB: votingData[1].abstain,
+          abstainSectionC: votingData[2].abstain,
+          abstainSectionD: votingData[3].abstain,
+          abstainSectionE: votingData[4].abstain,
+          totalYes,
+          totalNo,
+          totalAbstain,
+          totalVote,
+          percentageYes,
+          percentageNo,
+          percentageAbstain,
+          isElected
+        })
+      }
+      // TODO: Multiple candidates
+    })
+
+    downloadCsv(data, columns, `election-data-exported-${Date.now()}.csv`)
+  }
   renderPostElection() {
     const positions = Object.keys(this.state.election)
     // TODO: list down who is succesful in getting position
@@ -228,6 +314,9 @@ export default class Presentation extends React.Component {
             return null
           })}
         </List>
+        <Text>
+          <button onClick={this.handleDownloadData}>Export</button>
+        </Text>
       </Slide>
     )
   }
