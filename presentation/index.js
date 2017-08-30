@@ -146,7 +146,7 @@ export default class Presentation extends React.Component {
           votingData: constructInitialVotingData()
         },
         'Dharma Propagation Director': {
-          candidate: 'Danry Lim',
+          candidate: 'Danry Lim Wei Huang',
           votingData: constructInitialVotingData()
         },
         'Marketing Director': {
@@ -702,7 +702,6 @@ export default class Presentation extends React.Component {
                 <ListItem>Le Quang Luan</ListItem>
                 <ListItem>Lee Su Ann</ListItem>
                 <ListItem>Naing Htoo Aung</ListItem>
-                <ListItem>Robert Liono</ListItem>
                 <ListItem>Tew Hong Boon</ListItem>
               </List>
             </ListItem>
