@@ -285,7 +285,6 @@ export default {
     },
     list: {
       textAlign: 'left',
-      listStylePosition: 'inside',
       paddingTop: 0,
       paddingRight: 0,
       paddingBottom: 0,
