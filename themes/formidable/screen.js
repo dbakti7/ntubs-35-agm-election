@@ -298,7 +298,7 @@ export default {
       fontWeight: 'bold'
     },
     tableItem: {
-      fontSize: '2rem'
+      fontSize: '1.5rem'
     },
     table: {
       width: '100%'

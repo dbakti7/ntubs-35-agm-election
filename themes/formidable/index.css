@@ -227,6 +227,7 @@ input[type="number"] {
   border: 0;
   color: inherit;
   font-family: inherit;
+  font-size: inherit;
 }
 .smaller {
   font-size: .7em;

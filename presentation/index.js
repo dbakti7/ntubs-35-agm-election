@@ -34,7 +34,6 @@ import Card from './card'
 
 import downloadCsv from 'download-csv'
 
-
 import committeeStructure from './committee_structure'
 
 // Import theme
@@ -64,7 +63,7 @@ const getTotal = (votingData, type) => {
 }
 
 const constructInitialVotingData = () => {
-  return [1, 2, 3, 4, 5].map(() => {
+  return [1, 2, 3, 4, 5, 6, 7].map(() => {
     return { yes: 0, no: 0, abstain: 0 }
   })
 }
@@ -199,11 +198,7 @@ export default class Presentation extends React.Component {
         </Heading>
         <List>
           {positions.map(position => {
-            return (
-              <ListItem key={position}>
-                {position}
-              </ListItem>
-            )
+            return <ListItem key={position}>{position}</ListItem>
           })}
         </List>
       </Slide>
@@ -211,6 +206,7 @@ export default class Presentation extends React.Component {
   }
   handleDownloadData() {
     const data = []
+
     const columns = {
       position: 'Position',
       candidate: 'Candidate',
@@ -219,16 +215,22 @@ export default class Presentation extends React.Component {
       yesSectionC: 'For Votes (Section C)',
       yesSectionD: 'For Votes (Section D)',
       yesSectionE: 'For Votes (Section E)',
+      yesSectionF: 'For Votes (Section F)',
+      yesSectionG: 'For Votes (Section G)',
       noSectionA: 'Against Votes (Section A)',
       noSectionB: 'Against Votes (Section B)',
       noSectionC: 'Against Votes (Section C)',
       noSectionD: 'Against Votes (Section D)',
       noSectionE: 'Against Votes (Section E)',
+      noSectionF: 'Against Votes (Section F)',
+      noSectionG: 'Against Votes (Section G)',
       abstainSectionA: 'Abstain Votes (Section A)',
       abstainSectionB: 'Abstain Votes (Section B)',
       abstainSectionC: 'Abstain Votes (Section C)',
       abstainSectionD: 'Abstain Votes (Section D)',
       abstainSectionE: 'Abstain Votes (Section E)',
+      abstainSectionF: 'Abstain Votes (Section F)',
+      abstainSectionG: 'Abstain Votes (Section G)',
       totalYes: 'Total For Votes',
       totalNo: 'Total Against Votes',
       totalAbstain: 'Total Abstain Votes',
@@ -238,6 +240,7 @@ export default class Presentation extends React.Component {
       percentageAbstain: 'Percentage Abstain Votes',
       isElected: 'Is Candidate Elected?'
     }
+    const sectionNames = ['A', 'B', 'C', 'D', 'E', 'F', 'G']
     const positions = Object.keys(this.state.election)
     positions.forEach(position => {
       const positionData = this.state.election[position]
@@ -259,24 +262,9 @@ export default class Presentation extends React.Component {
           ? Math.round(totalAbstain * 10000 / totalVote) / 100
           : 0
         const isElected = isCandidateElected(votingData, position)
-        data.push({
+        const datum = {
           position,
           candidate,
-          yesSectionA: votingData[0].yes,
-          yesSectionB: votingData[1].yes,
-          yesSectionC: votingData[2].yes,
-          yesSectionD: votingData[3].yes,
-          yesSectionE: votingData[4].yes,
-          noSectionA: votingData[0].no,
-          noSectionB: votingData[1].no,
-          noSectionC: votingData[2].no,
-          noSectionD: votingData[3].no,
-          noSectionE: votingData[4].no,
-          abstainSectionA: votingData[0].abstain,
-          abstainSectionB: votingData[1].abstain,
-          abstainSectionC: votingData[2].abstain,
-          abstainSectionD: votingData[3].abstain,
-          abstainSectionE: votingData[4].abstain,
           totalYes,
           totalNo,
           totalAbstain,
@@ -285,7 +273,19 @@ export default class Presentation extends React.Component {
           percentageNo,
           percentageAbstain,
           isElected
-        })
+        }
+        for (let i = 0; i < 7; i++) {
+          datum['yesSection' + sectionNames[i]] = votingData[i].yes
+        }
+        for (let i = 0; i < 7; i++) {
+          datum['noSection' + sectionNames[i]] = votingData[i].no
+        }
+        for (let i = 0; i < 7; i++) {
+          datum['abstainSection' + sectionNames[i]] = votingData[i].abstain
+        }
+
+
+        data.push(datum)
       }
       // TODO: Multiple candidates
     })
@@ -398,9 +398,7 @@ export default class Presentation extends React.Component {
           <Heading caps size={6}>
             {position}
           </Heading>
-          <Text>
-            Candidate: {name}
-          </Text>
+          <Text>Candidate: {name}</Text>
         </Slide>
         <Slide>
           <Heading caps size={5}>
@@ -409,9 +407,7 @@ export default class Presentation extends React.Component {
           <Heading caps size={6}>
             {position}
           </Heading>
-          <Text>
-            Candidate: {name}
-          </Text>
+          <Text>Candidate: {name}</Text>
         </Slide>
         <Slide>
           <Heading caps size={5}>
@@ -443,7 +439,7 @@ export default class Presentation extends React.Component {
                 return (
                   <TableRow key={index}>
                     <TableItem className="noLineBreak">
-                      Section {['A', 'B', 'C', 'D', 'E'][index]}
+                      Section {['A', 'B', 'C', 'D', 'E', 'F', 'G'][index]}
                     </TableItem>
                     <TableItem>
                       {this.renderVotingInput(
@@ -491,9 +487,7 @@ export default class Presentation extends React.Component {
               </TableRow>
             </TableBody>
           </Table>
-          <Text>
-            Is Elected? {isElected ? 'Yes' : 'No'}
-          </Text>
+          <Text>Is Elected? {isElected ? 'Yes' : 'No'}</Text>
         </Slide>
         <Slide>
           <Heading caps size={4}>
@@ -502,15 +496,11 @@ export default class Presentation extends React.Component {
 
           <Layout>
             <Fill>
-              <Text>
-                {name}
-              </Text>
+              <Text>{name}</Text>
               <Text caps bold>
                 {`is ${isElected ? 'elected' : 'not elected'}`}
               </Text>
-              <Text>
-                as {position}
-              </Text>
+              <Text>as {position}</Text>
             </Fill>
           </Layout>
         </Slide>
@@ -552,9 +542,7 @@ export default class Presentation extends React.Component {
           <Heading caps size={6}>
             {position}
           </Heading>
-          <Text>
-            Candidate: {name}
-          </Text>
+          <Text>Candidate: {name}</Text>
         </Slide>
       )
       speechQaSlides.push(
@@ -565,9 +553,7 @@ export default class Presentation extends React.Component {
           <Heading caps size={6}>
             {position}
           </Heading>
-          <Text>
-            Candidate: {name}
-          </Text>
+          <Text>Candidate: {name}</Text>
         </Slide>
       )
     })
@@ -586,9 +572,7 @@ export default class Presentation extends React.Component {
                 return (
                   <TableHeaderItem key={name}>
                     <Card color={colors[index % 4]} />
-                    <Text>
-                      For {name}
-                    </Text>
+                    <Text>For {name}</Text>
                   </TableHeaderItem>
                 )
               })}
@@ -698,9 +682,9 @@ export default class Presentation extends React.Component {
               <List>
                 <ListItem>Aryani Paramita</ListItem>
                 <ListItem>Benny Febriansyah</ListItem>
+                <ListItem>Dhika Aditya Gandamana</ListItem>
                 <ListItem>Evando</ListItem>
                 <ListItem>Handoko</ListItem>
-                <ListItem>Jefferson</ListItem>
                 <ListItem>Kang Chun Hee</ListItem>
                 <ListItem>Le Quang Luan</ListItem>
                 <ListItem>Lee Su Ann</ListItem>
@@ -907,9 +891,7 @@ export default class Presentation extends React.Component {
         <Slide>
           <Heading>Election</Heading>
         </Slide>
-        <Slide>
-          {committeeStructure()}
-        </Slide>
+        <Slide>{committeeStructure()}</Slide>
         {this.renderPreElection()}
         {this.renderElection()}
         {this.renderPostElection()}
