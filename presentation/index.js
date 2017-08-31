@@ -34,6 +34,9 @@ import Card from './card'
 
 import downloadCsv from 'download-csv'
 
+
+import committeeStructure from './committee_structure'
+
 // Import theme
 // import createTheme from "spectacle/lib/themes/default";
 import theme from '../themes/formidable/index.js'
@@ -903,6 +906,9 @@ export default class Presentation extends React.Component {
         </Slide>
         <Slide>
           <Heading>Election</Heading>
+        </Slide>
+        <Slide>
+          {committeeStructure()}
         </Slide>
         {this.renderPreElection()}
         {this.renderElection()}
