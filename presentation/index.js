@@ -905,6 +905,13 @@ export default class Presentation extends React.Component {
           </BlockQuote>
         </Slide>
         <Slide>
+          <BlockQuote>
+            <Quote>
+              The election committee's decision is final.
+            </Quote>
+          </BlockQuote>
+        </Slide>
+        <Slide>
           <Heading>Election</Heading>
         </Slide>
         <Slide>{committeeStructure()}</Slide>
