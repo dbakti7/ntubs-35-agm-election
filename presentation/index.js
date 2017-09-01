@@ -24,7 +24,8 @@ import {
   TableItem,
   TableRow,
   TableHeader,
-  TableBody
+  TableBody,
+  S
 } from 'spectacle'
 
 import Card from './card'
@@ -844,16 +845,17 @@ export default class Presentation extends React.Component {
           <Heading caps size={6}>
             Election criteria: Multiple candidates
           </Heading>
-          <List>
+          <Text><S type="italic">Please refer to your booklet</S></Text>
+          {/* <List>
             <ListItem>Two types of votes: For, and Abstain</ListItem>
             <ListItem>Elected if "For" votes >50%</ListItem>
             <ListItem>
               Elected if "For" votes &lt;50%, "Abstain" votes &lt;40%, and
               obtains more "For" votes than other candidates, i.e. not tied.
             </ListItem>
-          </List>
+          </List> */}
         </Slide>
-        <Slide>
+        {/* <Slide>
           <Heading caps size={6}>
             Election criteria: Multiple candidates ("For" votes &lt;50%,
             "Abstain" votes &lt;40%, and tied)
@@ -868,7 +870,7 @@ export default class Presentation extends React.Component {
               both not elected.
             </ListItem>
           </List>
-        </Slide>
+        </Slide> */}
         <Slide>
           <Heading caps size={6}>
             New Committee Taking Office
