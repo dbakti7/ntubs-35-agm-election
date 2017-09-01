@@ -59,6 +59,9 @@ require('../fonts/montserrat.css')
 
 const getTotal = (votingData, type) => {
   return votingData.reduce((prevValue, votingSectionData) => {
+    if (!votingSectionData[type] || isNaN(votingSectionData[type])) {
+      return prevValue
+    }
     return votingSectionData[type] + prevValue
   }, 0)
 }
