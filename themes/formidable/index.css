@@ -241,3 +241,10 @@ input[type="number"] {
 .preline {
   white-space: pre-line;
 }
+.rallyFormSlide {
+  display: flex;
+}
+.rallyForm {
+  object-fit: contain;
+  flex: 1 1 auto;
+}

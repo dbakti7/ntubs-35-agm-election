@@ -9,7 +9,7 @@ import {
   Fill,
   // Fit,
   Heading,
-  // Image,
+  Image,
   Layout,
   // Link,
   ListItem,
@@ -30,7 +30,7 @@ import {
 import Card from './card'
 
 // Import image preloader util
-// import preloader from 'spectacle/lib/utils/preloader'
+import preloader from 'spectacle/lib/utils/preloader'
 
 import downloadCsv from 'download-csv'
 
@@ -55,7 +55,7 @@ require('../fonts/montserrat.css')
 //   logo: require("../assets/logo-seattlejsconference.svg")
 // };
 
-// preloader(images);
+
 const getTotal = (votingData, type) => {
   return votingData.reduce((prevValue, votingSectionData) => {
     return votingSectionData[type] + prevValue
@@ -165,6 +165,17 @@ export default class Presentation extends React.Component {
         }
       }
     }
+    const positions = Object.keys(this.state.election)
+    this.imagesData = {}
+    const images = positions.map(position => {
+      const positionData = this.state.election[position]
+      if (positionData.candidate) {
+        const image = require('../images/' + positionData.candidate + '.png')
+        this.imagesData[position] = image
+        return image
+      }
+    })
+    preloader(images)
   }
   componentDidMount() {
     // Read from local storage
@@ -399,6 +410,9 @@ export default class Presentation extends React.Component {
             {position}
           </Heading>
           <Text>Candidate: {name}</Text>
+        </Slide>
+        <Slide className="rallyFormSlide">
+          <Image src={this.imagesData[position]} className="rallyForm" />
         </Slide>
         <Slide>
           <Heading caps size={5}>
