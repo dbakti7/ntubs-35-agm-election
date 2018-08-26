@@ -43,7 +43,7 @@ export default function CommitteeStructure() {
       </text>
 
       <text x="656" y="156" dx="0,0.1,0.1,-0.1,0,0,0.1,0,-1.2" className="s2_1">
-        Elmer A.T.
+        Michelle Trisno
       </text>
 
       <path
@@ -70,7 +70,7 @@ export default function CommitteeStructure() {
         dx="0,0,0.1,0,0.1,0.1,0.1,0,0.1,-1.4,0,0.1,-0.2"
         className="s2_1"
       >
-        Donking Yappy
+        Arvin Liangdy
       </text>
 
       <path
@@ -101,7 +101,7 @@ export default function CommitteeStructure() {
         dx="0,0.2,0,0.1,0,-1.4,0.1,0,0.1,0"
         className="s2_1"
       >
-        Soh Yan Da
+        Chan Jun Hang
       </text>
 
       <path
@@ -132,7 +132,7 @@ export default function CommitteeStructure() {
         dx="0,0.1,0,0.1,0,0.1,0,0.1,0.1,0,0,0.1,0"
         className="s2_1"
       >
-        Ong Zhi Huang
+        Danry Lim Wei Huang
       </text>
 
       <path
@@ -158,7 +158,7 @@ export default function CommitteeStructure() {
       </text>
 
       <text x="697" y="420" dx="0,0,0,0.1,0,0.1,0,0,0.1" className="s2_1">
-        Danry Lim
+        Sim Jun Xun
       </text>
 
       <path
@@ -185,7 +185,7 @@ export default function CommitteeStructure() {
         dx="0,0,0,-0.1,0.1,-0.3,0.1,0.1,-0.7,0"
         className="s2_1"
       >
-        Lee Yi Wei
+        Alene Ku
       </text>
 
       <path
@@ -212,7 +212,7 @@ export default function CommitteeStructure() {
         dx="0,0,0.1,0.1,0.1,0,0.1,0,0.1,0,0.1,-0.1,0.1,0,0.1,0.1"
         className="s2_1"
       >
-        Willson Nicholas
+        Wilson Goenawan
       </text>
 
       <path
@@ -239,7 +239,7 @@ export default function CommitteeStructure() {
         dx="0,-0.1,0,0.1,0,0.1,-0.1,-0.1,0.1,-1.4,0.1"
         className="s2_1"
       >
-        Dedrick Tan
+        Jeffrey Huang
       </text>
 
       <path
@@ -275,7 +275,7 @@ export default function CommitteeStructure() {
         dx="0,-0.4,-0.1,0.1,0,0.1,-0.1,-0.4,0,0.1,0,0.1,0,0.1,-0.1"
         className="s2_1"
       >
-        Ryan Eka Cahaya
+        Soh Yan Da
       </text>
 
       <path
@@ -297,7 +297,7 @@ export default function CommitteeStructure() {
       </text>
 
       <text x="920" y="532" dx="0,0,-0.3,0,0,-0.1" className="s2_1">
-        Jeﬀrey
+        Eric Kho
       </text>
 
       <path
@@ -319,7 +319,7 @@ export default function CommitteeStructure() {
       </text>
 
       <text x="912" y="656" dx="0,0,-0.1,-0.1,0,0.1,-0.1" className="s2_1">
-        &lt;empty&gt;
+        Regina Yeo
       </text>
 
       <path
@@ -355,7 +355,7 @@ export default function CommitteeStructure() {
         dx="0,0,0.1,-0.1,0.1,0,-0.1,0.1,0,0.1,-0.7,0,0.1,0,0"
         className="s2_1"
       >
-        Michelle Trisno
+        Willson Nicholas
       </text>
 
       <path
@@ -377,7 +377,7 @@ export default function CommitteeStructure() {
       </text>
 
       <text x="1112" y="409" dx="0,0,0.1,0,0,0,0.1,-1.4,0,0.1" className="s2_1">
-        Andre Yoga
+        Tan Qi An
       </text>
 
       <path
@@ -404,7 +404,7 @@ export default function CommitteeStructure() {
         dx="0,0.2,0.1,0.1,0.1,0.1,0,0,0,0.1,0.1,0.1,0.1,0.1"
         className="s2_1"
       >
-        Willis Chailim
+        Andre Yoga
       </text>
 
       <path
@@ -431,7 +431,7 @@ export default function CommitteeStructure() {
         dx="0,-0.1,0,0.1,-0.1,0.1,0,0.1,0,-0.2,0.1,0"
         className="s2_1"
       >
-        Erik Angtoni
+        Daniel Wijaya
       </text>
     </svg>
   )
