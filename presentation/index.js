@@ -98,7 +98,7 @@ export default class Presentation extends React.Component {
     this.renderPreElection = this.renderPreElection.bind(this)
     this.renderPostElection = this.renderPostElection.bind(this)
     this.handleDownloadData = this.handleDownloadData.bind(this)
-    this.localStoreKey = 'NTUBS-AGM-35-election-data'
+    this.localStoreKey = 'NTUBS-AGM-36-election-data'
     this.state = {
       election: {
         // 'Some important position': {
@@ -112,68 +112,75 @@ export default class Presentation extends React.Component {
         //   ]
         // },
         President: {
-          candidate: 'Elmer Augustinus Trisno',
-          votingData: constructInitialVotingData()
-        },
-        'Vice President (Event)': {
-          candidate: 'Tan Jun Guang Dedrick',
-          votingData: constructInitialVotingData()
-        },
-        'Vice President (Dharma)': {
-          candidate: 'Ong Zhi Huang',
-          votingData: constructInitialVotingData()
-        },
-        'Honorary General Secretary': {
           candidate: 'Michelle Trisno',
           votingData: constructInitialVotingData()
         },
-        'Honorary Treasurer': {
-          candidate: 'Donking Yappy',
+        'Vice President (Event)': {
+          candidate: 'Jeffrey Huang',
           votingData: constructInitialVotingData()
         },
-        'External Liason Director': {
-          candidate: 'Soh Yan Da',
-          votingData: constructInitialVotingData()
-        },
-        'Event Director': {
-          candidate: 'Jeffrey',
-          votingData: constructInitialVotingData()
-        },
-        'Special Project Director': {
-          candidate: 'Ryan Eka Cahaya',
-          votingData: constructInitialVotingData()
-        },
-        'Fellowship Director': {
-          candidate: 'Lee Yi Wei',
-          votingData: constructInitialVotingData()
-        },
-        'Publication Director': {
-          candidate: 'Willson Nicholas',
-          votingData: constructInitialVotingData()
-        },
-        'Dharma Propagation Director': {
+        'Vice President (Dharma)': {
           candidate: 'Danry Lim Wei Huang',
           votingData: constructInitialVotingData()
         },
-        'Marketing Director': {
-          candidate: 'Willis Chailim',
+        'Honorary General Secretary': {
+          candidate: 'Willson Nicholas',
           votingData: constructInitialVotingData()
         },
-        'Resource Director': {
-          candidate: 'Erik Angtoni',
+        'Honorary Treasurer': {
+          candidate: 'Arvin Liangdy',
+          votingData: constructInitialVotingData()
+        },
+        'External Liason Director': {
+          candidate: 'Chan Jun Hang',
+          votingData: constructInitialVotingData()
+        },
+        'Event Director': {
+          candidate: 'Eric Kho',
+          votingData: constructInitialVotingData()
+        },
+        'Special Project Director': {
+          candidate: 'Soh Yan Da',
+          votingData: constructInitialVotingData()
+        },
+        'Metta Director': {
+          candidate: 'Regina Yeo',
+          votingData: constructInitialVotingData()
+        },
+        'Dharma Propagation Director': {
+          candidate: 'Sim Jun Xun',
+          votingData: constructInitialVotingData()
+        },
+        'Fellowship Director': {
+          candidate: 'Alene Ku',
+          votingData: constructInitialVotingData()
+        },
+        'Publication Director': {
+          candidate: 'Wilson Goenawan',
           votingData: constructInitialVotingData()
         },
         'Welfare Director': {
+          candidate: 'Tan Qi An',
+          votingData: constructInitialVotingData()
+        },
+        'Marketing Director': {
           candidate: 'Andre Yoga',
+          votingData: constructInitialVotingData()
+        },
+        'Resource Director': {
+          candidate: 'Daniel Wijaya',
           votingData: constructInitialVotingData()
         }
       }
     }
     const positions = Object.keys(this.state.election)
     this.imagesData = {}
+    console.log(positions)
+    console.log(this.state.election)
     const images = positions.map(position => {
       const positionData = this.state.election[position]
       if (positionData.candidate) {
+        console.log(positionData.candidate)
         const image = require('../images/' + positionData.candidate + '.png')
         this.imagesData[position] = image
         return image
@@ -313,7 +320,7 @@ export default class Presentation extends React.Component {
     return (
       <Slide>
         <Heading size={5}>
-          35<sup>th</sup> AGM Election Result
+          36<sup>th</sup> AGM Election Result
         </Heading>
         <List>
           {positions.map(position => {
@@ -685,29 +692,27 @@ export default class Presentation extends React.Component {
         transitionDuration={500}
       >
         <Slide>
-          <Heading>NTUBS 35th AGM Election</Heading>
+          <Heading>NTUBS 36th AGM Election</Heading>
         </Slide>
         <Slide>
           <Heading caps size={6}>
             Election Committee
           </Heading>
           <List>
-            <ListItem>Chairperson: Kenrick</ListItem>
-            <ListItem>Secretary/Time keeper: Rizky Wirawan Pratama</ListItem>
-            <ListItem>Escort: Peter</ListItem>
+            <ListItem>Chairperson: Marshall Valiant Lugan</ListItem>
+            <ListItem>Secretary/Time keeper: Dhika</ListItem>
+            <ListItem>Escort: Dian</ListItem>
             <ListItem>
               Vote counters:
               <List>
-                <ListItem>Aryani Paramita</ListItem>
                 <ListItem>Benny Febriansyah</ListItem>
-                <ListItem>Dhika Aditya Gandamana</ListItem>
+                <ListItem>Finnie</ListItem>
+                <ListItem>Jefferson Qiu</ListItem>
+                <ListItem>Meliana</ListItem>
+                <ListItem>Melitta</ListItem>
+                <ListItem>Sherly</ListItem>
                 <ListItem>Evando</ListItem>
-                <ListItem>Handoko</ListItem>
-                <ListItem>Kang Chun Hee</ListItem>
-                <ListItem>Le Quang Luan</ListItem>
-                <ListItem>Lee Su Ann</ListItem>
-                <ListItem>Naing Htoo Aung</ListItem>
-                <ListItem>Tew Hong Boon</ListItem>
+                <ListItem>Sri</ListItem>
               </List>
             </ListItem>
           </List>

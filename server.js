@@ -17,10 +17,13 @@ app.use(require("webpack-dev-middleware")(compiler, {
 
 app.use(require("webpack-hot-middleware")(compiler));
 
-app.get("*", function(req, res) {
+app.get("/agm36", function(req, res) {
   res.sendFile(path.join(__dirname, "index.html"));
 });
 
+app.get("*", function(req, res) {
+  res.send("Hi, There!")
+});
 app.listen(serverPort, "localhost", function (err) {
   if (err) {
     console.log(err);
