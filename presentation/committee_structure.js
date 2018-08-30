@@ -42,7 +42,7 @@ export default function CommitteeStructure() {
         President
       </text>
 
-      <text x="656" y="156" dx="0,0.1,0.1,-0.1,0,0,0.1,0,-1.2" className="s2_1">
+      <text x="637" y="156" dx="0,0.1,0.1,-0.1,0,0,0.1,0,-1.2" className="s2_1">
         Michelle Trisno
       </text>
 
@@ -65,7 +65,7 @@ export default function CommitteeStructure() {
       </text>
 
       <text
-        x="213"
+        x="220"
         y="285"
         dx="0,0,0.1,0,0.1,0.1,0.1,0,0.1,-1.4,0,0.1,-0.2"
         className="s2_1"
@@ -96,7 +96,7 @@ export default function CommitteeStructure() {
       </text>
 
       <text
-        x="438"
+        x="423"
         y="295"
         dx="0,0.2,0,0.1,0,-1.4,0.1,0,0.1,0"
         className="s2_1"
@@ -127,12 +127,12 @@ export default function CommitteeStructure() {
       </text>
 
       <text
-        x="634"
+        x="650"
         y="295"
         dx="0,0.1,0,0.1,0,0.1,0,0.1,0.1,0,0,0.1,0"
         className="s2_1"
       >
-        Danry Lim Wei Huang
+        Danry Lim
       </text>
 
       <path
@@ -157,7 +157,7 @@ export default function CommitteeStructure() {
         Director
       </text>
 
-      <text x="697" y="420" dx="0,0,0,0.1,0,0.1,0,0,0.1" className="s2_1">
+      <text x="688" y="420" dx="0,0,0,0.1,0,0.1,0,0,0.1" className="s2_1">
         Sim Jun Xun
       </text>
 
@@ -180,7 +180,7 @@ export default function CommitteeStructure() {
       </text>
 
       <text
-        x="696"
+        x="700"
         y="535"
         dx="0,0,0,-0.1,0.1,-0.3,0.1,0.1,-0.7,0"
         className="s2_1"
@@ -207,7 +207,7 @@ export default function CommitteeStructure() {
       </text>
 
       <text
-        x="668"
+        x="660"
         y="659"
         dx="0,0,0.1,0.1,0.1,0,0.1,0,0.1,0,0.1,-0.1,0.1,0,0.1,0.1"
         className="s2_1"
@@ -234,7 +234,7 @@ export default function CommitteeStructure() {
       </text>
 
       <text
-        x="857"
+        x="848"
         y="285"
         dx="0,-0.1,0,0.1,0,0.1,-0.1,-0.1,0.1,-1.4,0.1"
         className="s2_1"
@@ -270,7 +270,7 @@ export default function CommitteeStructure() {
       </text>
 
       <text
-        x="880"
+        x="900"
         y="419"
         dx="0,-0.4,-0.1,0.1,0,0.1,-0.1,-0.4,0,0.1,0,0.1,0,0.1,-0.1"
         className="s2_1"
@@ -296,7 +296,7 @@ export default function CommitteeStructure() {
         Event Director
       </text>
 
-      <text x="920" y="532" dx="0,0,-0.3,0,0,-0.1" className="s2_1">
+      <text x="910" y="532" dx="0,0,-0.3,0,0,-0.1" className="s2_1">
         Eric Kho
       </text>
 
@@ -318,7 +318,7 @@ export default function CommitteeStructure() {
         Metta Director
       </text>
 
-      <text x="912" y="656" dx="0,0,-0.1,-0.1,0,0.1,-0.1" className="s2_1">
+      <text x="900" y="656" dx="0,0,-0.1,-0.1,0,0.1,-0.1" className="s2_1">
         Regina Yeo
       </text>
 
@@ -350,7 +350,7 @@ export default function CommitteeStructure() {
       </text>
 
       <text
-        x="1055"
+        x="1050"
         y="295"
         dx="0,0,0.1,-0.1,0.1,0,-0.1,0.1,0,0.1,-0.7,0,0.1,0,0"
         className="s2_1"
@@ -376,7 +376,7 @@ export default function CommitteeStructure() {
         Welfare Director
       </text>
 
-      <text x="1112" y="409" dx="0,0,0.1,0,0,0,0.1,-1.4,0,0.1" className="s2_1">
+      <text x="1117" y="409" dx="0,0,0.1,0,0,0,0.1,-1.4,0,0.1" className="s2_1">
         Tan Qi An
       </text>
 
@@ -399,7 +399,7 @@ export default function CommitteeStructure() {
       </text>
 
       <text
-        x="1104"
+        x="1112"
         y="532"
         dx="0,0.2,0.1,0.1,0.1,0.1,0,0,0,0.1,0.1,0.1,0.1,0.1"
         className="s2_1"
@@ -426,7 +426,7 @@ export default function CommitteeStructure() {
       </text>
 
       <text
-        x="1109"
+        x="1105"
         y="656"
         dx="0,-0.1,0,0.1,-0.1,0.1,0,0.1,0,-0.2,0.1,0"
         className="s2_1"
