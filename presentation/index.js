@@ -67,7 +67,7 @@ const getTotal = (votingData, type) => {
 }
 
 const constructInitialVotingData = () => {
-  return [1, 2, 3, 4, 5, 6, 7].map(() => {
+  return [1, 2, 3, 4, 5, 6].map(() => {
     return { yes: 0, no: 0, abstain: 0 }
   })
 }
@@ -238,21 +238,18 @@ export default class Presentation extends React.Component {
       yesSectionD: 'For Votes (Section D)',
       yesSectionE: 'For Votes (Section E)',
       yesSectionF: 'For Votes (Section F)',
-      yesSectionG: 'For Votes (Section G)',
       noSectionA: 'Against Votes (Section A)',
       noSectionB: 'Against Votes (Section B)',
       noSectionC: 'Against Votes (Section C)',
       noSectionD: 'Against Votes (Section D)',
       noSectionE: 'Against Votes (Section E)',
       noSectionF: 'Against Votes (Section F)',
-      noSectionG: 'Against Votes (Section G)',
       abstainSectionA: 'Abstain Votes (Section A)',
       abstainSectionB: 'Abstain Votes (Section B)',
       abstainSectionC: 'Abstain Votes (Section C)',
       abstainSectionD: 'Abstain Votes (Section D)',
       abstainSectionE: 'Abstain Votes (Section E)',
       abstainSectionF: 'Abstain Votes (Section F)',
-      abstainSectionG: 'Abstain Votes (Section G)',
       totalYes: 'Total For Votes',
       totalNo: 'Total Against Votes',
       totalAbstain: 'Total Abstain Votes',
@@ -464,7 +461,7 @@ export default class Presentation extends React.Component {
                 return (
                   <TableRow key={index}>
                     <TableItem className="noLineBreak">
-                      Section {['A', 'B', 'C', 'D', 'E', 'F', 'G'][index]}
+                      Section {['A', 'B', 'C', 'D', 'E', 'F'][index]}
                     </TableItem>
                     <TableItem>
                       {this.renderVotingInput(
