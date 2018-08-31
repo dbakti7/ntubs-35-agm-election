@@ -259,7 +259,7 @@ export default class Presentation extends React.Component {
       percentageAbstain: 'Percentage Abstain Votes',
       isElected: 'Is Candidate Elected?'
     }
-    const sectionNames = ['A', 'B', 'C', 'D', 'E', 'F', 'G']
+    const sectionNames = ['A', 'B', 'C', 'D', 'E', 'F']
     const positions = Object.keys(this.state.election)
     positions.forEach(position => {
       const positionData = this.state.election[position]
@@ -293,13 +293,13 @@ export default class Presentation extends React.Component {
           percentageAbstain,
           isElected
         }
-        for (let i = 0; i < 7; i++) {
+        for (let i = 0; i < 6; i++) {
           datum['yesSection' + sectionNames[i]] = votingData[i].yes
         }
-        for (let i = 0; i < 7; i++) {
+        for (let i = 0; i < 6; i++) {
           datum['noSection' + sectionNames[i]] = votingData[i].no
         }
-        for (let i = 0; i < 7; i++) {
+        for (let i = 0; i < 6; i++) {
           datum['abstainSection' + sectionNames[i]] = votingData[i].abstain
         }
 
